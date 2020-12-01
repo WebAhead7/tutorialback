@@ -2,11 +2,10 @@
 const db = require("../database/connection");
 
 function createUser(user) {
-  return db.insert("users", { ...user });
+  return db.query(" INSERT INTO users", { ...user });
 }
 
 function getUser(email, user_password) {
-  // const filter = (user) => user.id === id;
   return db
     .query(`SELECT * FROM users WHERE email = $1 and user_password = $2  `, [
       email,
