@@ -10,7 +10,21 @@ function signup(req, res, next) {
   const firstname = req.body.firstname;
   const lastname = req.body.lastname;
   const email = req.body.email;
-  model.getUser(username, firstname, lastname, email).then((user) => {});
+  model
+    .getUser(username, firstname, lastname, email)
+    .then((user) => {
+      const token = jwt.sign({
+        user: {
+          username,
+          firstname,
+          lastname,
+          email,
+        },
+        SECRET,
+      });
+      res.status(200).send({ user });
+    })
+    .catch(next);
 }
 
 module.exports = { signup };
