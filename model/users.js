@@ -19,6 +19,6 @@ function getUser(email, user_password) {
 }
 
 module.exports = {
-  createUser,
   getUser,
+  createUser,
 };
