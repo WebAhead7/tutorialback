@@ -1,6 +1,5 @@
 // const { urlencoded } = require("express");
 const db = require("../database/connection");
-
 function createUser(user) {
   return db.insert("users", { ...user });
 }
