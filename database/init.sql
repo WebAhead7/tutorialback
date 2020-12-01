@@ -18,6 +18,8 @@ CREATE TABLE tutorials (
   tutorial_descripstion TEXT NOT NULL,
   tutorial_status BOOLEAN NOT NULL
 );
+ 
+ 
 
 INSERT INTO users (userid,username,firstname,lastname,email,user_password) VALUES 
 (123456789,'RakadKh', 'Rakad', 'Khawaled', 'a@gmail.com','12345'),

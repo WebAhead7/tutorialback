@@ -1,4 +1,4 @@
-const db = require('../database/connection');
+const db = require("../database/connection");
 
 const getAll = () => db.query('SELECT * FROM tutorials').then(res => res.rows);
 
