@@ -1,4 +1,4 @@
-const db = require('../database/connection');
+const db = require("../database/connection");
 
 function createNewTutorial(data) {
   const values = [
@@ -15,5 +15,5 @@ function createNewTutorial(data) {
 }
 
 module.exports = {
-  createNewpost,
+  createNewTutorial,
 };
