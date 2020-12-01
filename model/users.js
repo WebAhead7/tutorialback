@@ -1,18 +1,25 @@
-const db = require('../database/connection');
+// const { urlencoded } = require("express");
+const db = require("../database/connection");
 
-function createNewTutorial(data) {
-  const values = [
-    data.tutorial_title,
-    data.tutorial_status,
-    data.tutorial_descripstion,
-  ];
-  return db.query(
-    `
-      INSERT INTO tutorials(tutorial_title, tutorial_status, tutorial_descripstion) VALUES($1,$2,$3)`,
-    values
-  );
+function createUser(user) {
+  return db.insert("users", { ...user });
+}
+
+function getUser(email, user_password) {
+  // const filter = (user) => user.id === id;
+  return db
+    .query(`SELECT * FROM users WHERE email = $1 and user_password = $2  `, [
+      email,
+      user_password,
+    ])
+    .then(({ rows }) => {
+      console.log(rows);
+      if (!rows.length) throw new Error(`No user with email  '${email}' found`);
+      return rows[0];
+    });
 }
 
 module.exports = {
-  createNewpost,
+  createUser,
+  getUser,
 };
