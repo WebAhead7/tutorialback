@@ -1,5 +1,5 @@
 // const { urlencoded } = require("express");
-const db = require("../database/connection");
+const db = require('../database/connection');
 
 // function createUser(user) {
 //   return db.query(" INSERT INTO users", { ...user });
@@ -12,7 +12,7 @@ function getUser(email, user_password) {
       user_password,
     ])
     .then(({ rows }) => {
-      console.log(rows);
+      // console.log(rows);
       if (!rows.length) throw new Error(`here are no users`);
       return rows[0];
     });
@@ -24,11 +24,12 @@ function getSignupUser(
   firstname,
   lastname,
   email,
-  user_password
+  user_password,
+  access_token
 ) {
   return db.query(
-    `INSERT INTO users (userid,username,firstname,lastname,email,user_password) VALUES($1,$2,$3,$4,$5,$6)`,
-    [userid, username, firstname, lastname, email, user_password]
+    `INSERT INTO users (userid,username,firstname,lastname,email,user_password, access_token) VALUES($1,$2,$3,$4,$5,$6,$7)`,
+    [userid, username, firstname, lastname, email, user_password, access_token]
   );
   // .then(({ rows }) => {
   //   // console.log(rows);
@@ -37,12 +38,10 @@ function getSignupUser(
 }
 
 const getAllUsers = () =>
-  db.query("SELECT * FROM users").then((res) => res.rows);
+  db.query('SELECT * FROM users').then((res) => res.rows);
 
 module.exports = {
   getUser,
   getSignupUser,
   getAllUsers,
 };
-
-

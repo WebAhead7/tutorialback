@@ -1,8 +1,10 @@
-const db = require("../database/connection");
+const db = require('../database/connection');
 
-const getAll = () => db.query('SELECT * FROM tutorials').then(res => res.rows);
+const getAll = () =>
+  db.query('SELECT * FROM tutorials').then((res) => res.rows);
 
-const getOne = (id) => db.query(`SELECT * FROM tutorials WHERE user_id = ${id}`).then(res => res.rows);
+const getOne = (id) =>
+  db.query(`SELECT * FROM tutorials WHERE id=$1`, [id]).then((res) => res.rows);
 
 const createNewTutorial = (data) => {
   const values = [
@@ -16,14 +18,14 @@ const createNewTutorial = (data) => {
       INSERT INTO tutorials(user_id, tutorial_title, tutorial_descripstion, tutorial_status) VALUES($1,$2,$3,$4)`,
     values
   );
-}
+};
 
 const edit = (id, newTut) => {
   const values = [
     newTut.tutorial_title,
     newTut.tutorial_descripstion,
     newTut.tutorial_status,
-    id
+    id,
   ];
   return db.query(
     `
@@ -31,18 +33,18 @@ const edit = (id, newTut) => {
      tutorial_title=$1,
      tutorial_descripstion=$2, 
      tutorial_status=$3
-    WHERE id=$4 ;`
-    , values
+    WHERE id=$4 ;`,
+    values
   );
-}
+};
 const del = (id) => {
   return db.query(
     `
     DELETE FROM tutorials
-    WHERE id=$1;`
-    , [id]
+    WHERE id=$1;`,
+    [id]
   );
-}
+};
 
 // const updateTutorial = (data) => {
 //   const id = req.params.id;
@@ -64,8 +66,10 @@ const del = (id) => {
 //     .catch(next);
 // }
 
-
-
 module.exports = {
-  createNewTutorial, getAll, getOne, edit, del
+  createNewTutorial,
+  getAll,
+  getOne,
+  edit,
+  del,
 };
