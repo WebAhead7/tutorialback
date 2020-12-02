@@ -16,20 +16,18 @@ function signup(req, res, next) {
   model
     .getSignupUser(userid, username, firstname, lastname, email, user_password)
     .then((user) => {
-      const token = jwt.sign(
-        {
-          user: {
-            userid,
-            username,
-            firstname,
-            lastname,
-            email,
-            user_password,
-          },
-        },
-        SECRET
-      );
-      res.status(200).send({ user });
+      // const token = jwt.sign({ user: user.userid }, SECRET);
+      // const response = {
+      //   userid: user.userid,
+      //   username: user.username,
+      //   firstname: user.firstname,
+      //   lastname: user.lastname,
+      //   email: user.email,
+      //   access_token: token,
+      // };
+      // console.log(response);
+      // console.log(user.rows);
+      res.status(200).send(user);
     })
     .catch(next);
 }

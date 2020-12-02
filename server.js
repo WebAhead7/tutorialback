@@ -14,7 +14,8 @@ server.post("/tutorials/", datalist.post);
 server.put("/tutorials/:id", datalist.put);
 server.delete("/tutorials/:id", datalist.del);
 server.get("/log-in", login.login);
-server.get("/signup", signup.signup);
+server.post("/signup", signup.signup);
+server.get("/users", datalist.getAllUsers);
 
 server.use(handleError);
 

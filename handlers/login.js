@@ -17,8 +17,8 @@ function login(req, res, next) {
         const error = new Error("Unathorized");
         error.status = 401;
         next(error);
-        // } else if (password !== user.user_password && email !== user.email) {
-        //   res.redirect("/signup");
+      } else if (password !== user.user_password && email !== user.email) {
+        res.redirect("/signup");
       } else {
         const token = jwt.sign(
           {
