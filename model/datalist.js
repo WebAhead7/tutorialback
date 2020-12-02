@@ -18,6 +18,32 @@ const createNewTutorial = (data) => {
   );
 }
 
+const edit = (id, newTut) => {
+  const values = [
+    newTut.tutorial_title,
+    newTut.tutorial_descripstion,
+    newTut.tutorial_status,
+    id
+  ];
+  return db.query(
+    `
+    UPDATE tutorials SET
+     tutorial_title=$1,
+     tutorial_descripstion=$2, 
+     tutorial_status=$3
+    WHERE id=$4 ;`
+    , values
+  );
+}
+const del = (id) => {
+  return db.query(
+    `
+    DELETE FROM tutorials
+    WHERE id=$1;`
+    , [id]
+  );
+}
+
 // const updateTutorial = (data) => {
 //   const id = req.params.id;
 //   const userId = req.user.id;
@@ -41,5 +67,5 @@ const createNewTutorial = (data) => {
 
 
 module.exports = {
-  createNewTutorial, getAll, getOne
+  createNewTutorial, getAll, getOne, edit, del
 };
