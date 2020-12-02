@@ -15,11 +15,11 @@ server.get('/tutorials', datalist.getAll);
 server.get('/tutorials/:id', datalist.getOne);
 server.post('/tutorials/', verifyUser, datalist.post);
 server.put('/tutorials/:id', verifyUser, datalist.put);
-server.delete('/tutorials/:id', datalist.del);
+server.delete('/tutorials/:id', verifyUser, datalist.del);
 server.post('/log-in', login.login);
 server.post('/signup', signup.signup);
 server.get('/users', datalist.getAllUsers);
-server.get('/users/:id', login.getOne);
+server.get('/users/:id', login.getOneUserBySerialID);
 
 server.use(handleError);
 

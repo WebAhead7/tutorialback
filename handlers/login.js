@@ -6,10 +6,11 @@ dotenv.config();
 
 const SECRET = process.env.JWT_SECRET;
 
+// get one user
 const getOne = (req, res, next) => {
   const id = req.params.id;
   model
-    .getOne(id)
+    .getOneUserBySerialID(id)
     .then((data) => {
       res.send(data);
     })
@@ -17,7 +18,6 @@ const getOne = (req, res, next) => {
 };
 
 function login(req, res, next) {
-  // console.log(req.body);
   const email = req.body.email;
   const password = req.body.user_password;
   model

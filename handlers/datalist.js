@@ -36,18 +36,15 @@ const post = (req, res, next) => {
 };
 
 const put = (req, res, next) => {
-  //   console.log('hello');
-
   const id = req.params.id;
   const userId = req.user.id;
   let newTut = req.body;
-  //   console.log(userId);
   datamodel
     .getOne(id)
     .then((data) => {
       if (data[0].user_id !== userId) {
         const error = new Error(
-          'Unauthorized - Do not have access to edit/delete this tutorial'
+          'Unauthorized - Do not have access to edit this tutorial'
         );
         error.status = 401;
         next(error);
@@ -60,9 +57,21 @@ const put = (req, res, next) => {
 
 const del = (req, res, next) => {
   const id = req.params.id;
+  const userId = req.user.id;
+
   datamodel
-    .del(id)
-    .then((data) => res.send(data))
+    .getOne(id)
+    .then((data) => {
+      if (data[0].user_id !== userId) {
+        const error = new Error(
+          'Unauthorized - Do not have access to delete this tutorial'
+        );
+        error.status = 401;
+        next(error);
+      } else {
+        datamodel.del(id).then(() => res.status(204).send());
+      }
+    })
     .catch(next);
 };
 

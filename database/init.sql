@@ -8,8 +8,7 @@ CREATE TABLE users (
   firstname VARCHAR(255) NOT NULL,  
   lastname VARCHAR(255) NOT NULL,
   email VARCHAR(255) NOT NULL,
-  user_password VARCHAR(255) NOT NULL,
-  access_token VARCHAR(255) NOT NULL
+  user_password VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE tutorials (
