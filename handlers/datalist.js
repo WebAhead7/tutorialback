@@ -26,7 +26,9 @@ const getOne = (req, res, next) => {
 };
 
 const post = (req, res, next) => {
+  const user = req.user;
   const newTut = req.body;
+  newTut.user_id = user.id;
   datamodel
     .createNewTutorial(newTut)
     .then((data) => res.status(201).send(data))
@@ -34,13 +36,25 @@ const post = (req, res, next) => {
 };
 
 const put = (req, res, next) => {
-  const id = req.params.id;
-  let newTut = req.body;
-  //   console.log(newTut, id);
+  //   console.log('hello');
 
+  const id = req.params.id;
+  const userId = req.user.id;
+  let newTut = req.body;
+  //   console.log(userId);
   datamodel
-    .edit(id, newTut)
-    .then((data) => res.send(data))
+    .getOne(id)
+    .then((data) => {
+      if (data[0].user_id !== userId) {
+        const error = new Error(
+          'Unauthorized - Do not have access to edit/delete this tutorial'
+        );
+        error.status = 401;
+        next(error);
+      } else {
+        datamodel.edit(id, newTut).then((data) => res.status(200).send(data));
+      }
+    })
     .catch(next);
 };
 

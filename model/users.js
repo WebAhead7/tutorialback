@@ -4,18 +4,19 @@ const db = require('../database/connection');
 // function createUser(user) {
 //   return db.query(" INSERT INTO users", { ...user });
 // }
+const getOne = (id) =>
+  db.query(`SELECT * FROM users WHERE userid=$1`, [id]).then((res) => {
+    if (!res.rows.length) {
+      throw new Error('User not found');
+    }
+    return res.rows[0];
+  });
 
-function getUser(email, user_password) {
-  return db
-    .query(`SELECT * FROM users WHERE email = $1 and user_password = $2  `, [
-      email,
-      user_password,
-    ])
-    .then(({ rows }) => {
-      // console.log(rows);
-      if (!rows.length) throw new Error(`here are no users`);
-      return rows[0];
-    });
+function getUser(email) {
+  return db.query(`SELECT * FROM users WHERE email=$1`, [email]).then((res) => {
+    if (!res.rows.length) throw new Error(`No user with that email`);
+    return res.rows[0];
+  });
 }
 
 function getSignupUser(
@@ -44,4 +45,5 @@ module.exports = {
   getUser,
   getSignupUser,
   getAllUsers,
+  getOne,
 };

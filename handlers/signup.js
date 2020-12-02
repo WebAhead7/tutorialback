@@ -29,14 +29,14 @@ function signup(req, res, next) {
       access_token
     )
     .then((user) => {
-      // const response = {
-      //   username: user.username,
-      //   email: user.email,
-      //   access_token: user.access_token,
-      // };
+      const response = {
+        username: user.username,
+        email: user.email,
+        access_token: user.access_token,
+      };
       // console.log(response);
       // console.log(user.rows);
-      res.status(200).send(user);
+      res.status(200).send(response);
     })
     .catch(next);
 }
