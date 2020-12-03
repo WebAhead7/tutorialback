@@ -21,22 +21,29 @@ const createNewTutorial = (data) => {
 };
 
 const edit = (id, newTut) => {
-  const values = [
-    newTut.tutorial_title,
-    newTut.tutorial_description,
-    newTut.tutorial_status,
-    id,
-  ];
-  return db.query(
-    `
+  let oldTut = getOne(id);
+  getOne(id).then(function (result) {
+    console.log("new:", newTut)
+    console.log("old:", result[0])
+    const values = [
+      newTut.tutorial_title ? newTut.tutorial_title : result[0].tutorial_title,
+      newTut.tutorial_description ? newTut.tutorial_description : result[0].tutorial_description,
+      newTut.tutorial_status ? newTut.tutorial_status : result[0].tutorial_status,
+      id,
+    ];
+    console.log("values:", values);
+    return db.query(
+      `
     UPDATE tutorials SET
      tutorial_title=$1,
      tutorial_description=$2, 
      tutorial_status=$3
     WHERE id=$4 ;`,
-    values
-  );
+      values
+    );
+  });
 };
+
 const del = (id) => {
   return db.query(
     `

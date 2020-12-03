@@ -49,7 +49,8 @@ const put = (req, res, next) => {
         error.status = 401;
         next(error);
       } else {
-        datamodel.edit(id, newTut).then((data) => res.status(200).send(data));
+        let finish = datamodel.edit(id, newTut);
+        res.status(200).send(finish);
       }
     })
     .catch(next);
