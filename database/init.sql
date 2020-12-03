@@ -15,7 +15,7 @@ CREATE TABLE tutorials (
   id SERIAL PRIMARY KEY,
   user_id INTEGER REFERENCES users(id),
   tutorial_title VARCHAR(255) NOT NULL,
-  tutorial_descripstion TEXT NOT NULL,
+  tutorial_description TEXT NOT NULL,
   tutorial_status BOOLEAN NOT NULL
 );
 
