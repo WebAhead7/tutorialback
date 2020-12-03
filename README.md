@@ -15,7 +15,7 @@
 
 ## About The Project
 
-We learned how to build a service that manages PSQL data using the REST architecture. We also learned how to use bearer tokens to authenticate our API, and Insomnia to test it in development.
+We learned how to build a service that manages Postgres database using the REST architecture. We also learned how to use bearer tokens to authenticate our API, and Insomnia to test it in development.
 
 <!-- GETTING STARTED -->
 ## Getting Started
@@ -29,10 +29,9 @@ Check out the project instructions from WebAhead: [Projet instructions](https://
 
 ## Built With
 
-- HTML
-- CSS
-- JSX
-- React
+- JS
+- Express
+- SQL
 
 <!-- ROADMAP -->
 
