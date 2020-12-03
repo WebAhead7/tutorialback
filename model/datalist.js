@@ -21,17 +21,17 @@ const createNewTutorial = (data) => {
 };
 
 const edit = (id, newTut) => {
-  let oldTut = getOne(id);
   getOne(id).then(function (result) {
-    console.log("new:", newTut)
-    console.log("old:", result[0])
     const values = [
       newTut.tutorial_title ? newTut.tutorial_title : result[0].tutorial_title,
-      newTut.tutorial_description ? newTut.tutorial_description : result[0].tutorial_description,
-      newTut.tutorial_status ? newTut.tutorial_status : result[0].tutorial_status,
+      newTut.tutorial_description
+        ? newTut.tutorial_description
+        : result[0].tutorial_description,
+      newTut.tutorial_status
+        ? newTut.tutorial_status
+        : result[0].tutorial_status,
       id,
     ];
-    console.log("values:", values);
     return db.query(
       `
     UPDATE tutorials SET
