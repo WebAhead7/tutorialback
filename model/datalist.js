@@ -4,7 +4,12 @@ const getAll = () =>
   db.query('SELECT * FROM tutorials').then((res) => res.rows);
 
 const getOne = (id) =>
-  db.query(`SELECT * FROM tutorials WHERE id=$1`, [id]).then((res) => res.rows);
+  db.query(`SELECT * FROM tutorials WHERE id=$1`, [id]).then((res) => {
+    if (!res.rows.length) {
+      throw new Error('Tutorial not found');
+    }
+    return res.rows[0];
+  });
 
 const createNewTutorial = (data) => {
   const values = [
@@ -22,15 +27,16 @@ const createNewTutorial = (data) => {
 
 const edit = (id, newTut) => {
   getOne(id).then(function (result) {
-    console.log("new:", newTut)
-    console.log("old:", result[0])
     const values = [
       newTut.tutorial_title ? newTut.tutorial_title : result[0].tutorial_title,
-      newTut.tutorial_description ? newTut.tutorial_description : result[0].tutorial_description,
-      newTut.tutorial_status ? newTut.tutorial_status : result[0].tutorial_status,
+      newTut.tutorial_description
+        ? newTut.tutorial_description
+        : result[0].tutorial_description,
+      newTut.tutorial_status
+        ? newTut.tutorial_status
+        : result[0].tutorial_status,
       id,
     ];
-    console.log("values:", values);
     return db.query(
       `
     UPDATE tutorials SET
