@@ -27,7 +27,7 @@ We learned how to build a service that manages Postgres database using the REST 
 1. Run `npm run dev`
 
 ### create .env file and add DATABASE_URL and JWT_SECRET
-Run databse, and do \include database/init.sql to start running the table in PSQL 
+Run databse, and do in wsl "\include database/init.sql" to start running the table in PSQL 
 
 Check out the project instructions from WebAhead: [Projet instructions](https://github.com/WebAhead/master-reference/blob/master/coursebook/week-9/project.md)
 
