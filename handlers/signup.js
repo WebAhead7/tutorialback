@@ -6,7 +6,6 @@ dotenv.config();
 const SECRET = process.env.JWT_SECRET;
 
 function signup(req, res, next) {
-  // console.log(req.body);
   const userid = req.body.userid;
   const username = req.body.username;
   const firstname = req.body.firstname;
@@ -25,8 +24,6 @@ function signup(req, res, next) {
         email: user.email,
         access_token: token,
       };
-      // console.log(response);
-      // console.log(user.rows);
       res.status(200).send(response);
     })
     .catch(next);

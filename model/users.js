@@ -34,10 +34,6 @@ function getSignupUser(
     `INSERT INTO users (userid,username,firstname,lastname,email,user_password) VALUES($1,$2,$3,$4,$5,$6)`,
     [userid, username, firstname, lastname, email, user_password]
   );
-  // .then(({ rows }) => {
-  //   // console.log(rows);
-  //   return rows[0];
-  // });
 }
 
 const getAllUsers = () =>
