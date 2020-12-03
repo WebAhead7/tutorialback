@@ -21,7 +21,6 @@ const createNewTutorial = (data) => {
 };
 
 const edit = (id, newTut) => {
-  let oldTut = getOne(id);
   getOne(id).then(function (result) {
     console.log("new:", newTut)
     console.log("old:", result[0])
