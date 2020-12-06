@@ -42,7 +42,7 @@ const put = (req, res, next) => {
   datamodel
     .getOne(id)
     .then((data) => {
-      if (data[0].user_id !== userId) {
+      if (data.user_id !== userId) {
         const error = new Error(
           'Unauthorized - Do not have access to edit this tutorial'
         );
@@ -63,7 +63,7 @@ const del = (req, res, next) => {
   datamodel
     .getOne(id)
     .then((data) => {
-      if (data[0].user_id !== userId) {
+      if (data.user_id !== userId) {
         const error = new Error(
           'Unauthorized - Do not have access to delete this tutorial'
         );

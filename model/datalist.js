@@ -28,13 +28,11 @@ const createNewTutorial = (data) => {
 const edit = (id, newTut) => {
   getOne(id).then(function (result) {
     const values = [
-      newTut.tutorial_title ? newTut.tutorial_title : result[0].tutorial_title,
+      newTut.tutorial_title ? newTut.tutorial_title : result.tutorial_title,
       newTut.tutorial_description
         ? newTut.tutorial_description
-        : result[0].tutorial_description,
-      newTut.tutorial_status
-        ? newTut.tutorial_status
-        : result[0].tutorial_status,
+        : result.tutorial_description,
+      newTut.tutorial_status ? newTut.tutorial_status : result.tutorial_status,
       id,
     ];
     return db.query(
