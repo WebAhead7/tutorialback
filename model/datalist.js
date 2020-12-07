@@ -1,7 +1,11 @@
 const db = require('../database/connection');
 
 const getAll = () =>
-  db.query('SELECT * FROM tutorials INNER JOIN users WHERE users.id = tutorials.user_id').then((res) => res.rows);
+  db
+    .query(
+      'SELECT * FROM tutorials INNER JOIN users ON tutorials.user_id = users.id'
+    )
+    .then((res) => res.rows);
 
 const getOne = (id) =>
   db.query(`SELECT * FROM tutorials WHERE id=$1`, [id]).then((res) => {
