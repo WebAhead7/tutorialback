@@ -3,7 +3,7 @@ const db = require('../database/connection');
 const getAll = () =>
   db
     .query(
-      'SELECT * FROM tutorials INNER JOIN users ON tutorials.user_id = users.id'
+      'SELECT tutorials.id, tutorials.user_id, tutorials.tutorial_title, tutorials.tutorial_description, tutorials.tutorial_status, users.userid, users.firstname, users.lastname, users.email FROM tutorials INNER JOIN users ON tutorials.user_id = users.id'
     )
     .then((res) => res.rows);
 
