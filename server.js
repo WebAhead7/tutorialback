@@ -5,12 +5,18 @@ const datalist = require('./handlers/datalist');
 const signup = require('./handlers/signup');
 const verifyUser = require('./middleware/auth');
 const logger = require('./middleware/logger');
+const bodyParser = require('body-parser');
+const cors = require('cors');
 
 const PORT = process.env.PORT || 3000;
 const server = express();
 server.use(express.urlencoded());
 server.use(logger);
+server.use(cors());
+server.use(express.json());
 
+server.use(bodyParser.json());
+server.use(bodyParser.urlencoded({ extended: true }));
 server.get('/tutorials', datalist.getAll);
 server.get('/tutorials/:id', datalist.getOne);
 server.post('/tutorials/', verifyUser, datalist.post);
