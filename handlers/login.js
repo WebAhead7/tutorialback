@@ -22,6 +22,7 @@ function login(req, res, next) {
   const obj = {
     msg: '',
   };
+  console.log(req.body);
   const email = req.body.email;
   const password = req.body.user_password;
   model
