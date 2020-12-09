@@ -38,13 +38,15 @@ function login(req, res, next) {
         next(error);
       } else {
         console.log(2);
-        const token = jwt.sign({ user: user.userid }, SECRET, {
-          expiresIn: '1h',
-        });
-        obj.msg = 'Logged in';
+        const token = jwt.sign({ user: user.userid }, SECRET);
+        console.log(token);
         console.log(3);
+        obj.msg = 'Logged in';
+        console.log(4);
         res.cookie('access_token', token);
+        console.log(5);
         res.status(200).send(obj);
+        console.log(6);
       }
     })
     .catch(next);
