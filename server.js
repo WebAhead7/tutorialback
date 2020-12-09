@@ -8,7 +8,7 @@ const logger = require('./middleware/logger');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 4000;
 const server = express();
 server.use(express.urlencoded());
 server.use(logger);
