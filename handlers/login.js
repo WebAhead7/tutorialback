@@ -21,6 +21,7 @@ const getOne = (req, res, next) => {
 function login(req, res, next) {
   const obj = {
     msg: '',
+    access_token: '',
   };
   console.log(req.body);
   const email = req.body.email;
@@ -45,6 +46,7 @@ function login(req, res, next) {
         console.log(4);
         res.cookie('access_token', token);
         console.log(5);
+        obj.access_token = token;
         res.status(200).send(obj);
         console.log(6);
       }
