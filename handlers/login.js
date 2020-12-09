@@ -27,6 +27,8 @@ function login(req, res, next) {
   model
     .getUser(email)
     .then((user) => {
+      console.log(password);
+      console.log(user.user_password);
       if (password !== user.user_password) {
         const error = new Error('Wrong Password - Unathorized');
         obj.msg = 'Wrong Password - Unathorized';
