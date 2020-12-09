@@ -1,6 +1,7 @@
 const model = require('../model/users');
 const jwt = require('jsonwebtoken');
 const dotenv = require('dotenv');
+// const bcrypt = require('bcryptjs');
 
 dotenv.config();
 
@@ -18,6 +19,9 @@ const getOne = (req, res, next) => {
 };
 
 function login(req, res, next) {
+  const obj = {
+    msg: '',
+  };
   const email = req.body.email;
   const password = req.body.user_password;
   model
@@ -25,13 +29,16 @@ function login(req, res, next) {
     .then((user) => {
       if (password !== user.user_password) {
         const error = new Error('Wrong Password - Unathorized');
-        error.status = 401;
+        obj.msg = 'Wrong Password - Unathorized';
+        res.status(404).send(obj);
         next(error);
       } else {
         const token = jwt.sign({ user: user.userid }, SECRET, {
           expiresIn: '1h',
         });
-        res.status(200).send({ access_token: token });
+        obj.msg = 'Logged in';
+        res.cookie('access_token', token);
+        res.status(200).send(obj);
       }
     })
     .catch(next);

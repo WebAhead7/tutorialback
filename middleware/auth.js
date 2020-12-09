@@ -6,20 +6,27 @@ dotenv.config();
 const SECRET = process.env.JWT_SECRET;
 
 function verifyUser(req, res, next) {
-  const authHeader = req.headers.authorization;
-  if (!authHeader) {
-    const error = new Error('Authorization header is required');
+  // const authHeader = req.headers.authorization;
+  const token = req.cookies.access_token;
+
+  if (!token) {
+    const error = new Error('Authorization token is required');
     error.status = 400;
     next(error);
   } else {
     try {
-      const token = authHeader.replace('Bearer ', '');
+      // const token = authHeader.replace('Bearer ', '');
+
       // if verification fails JWT throws an error, hence the try/catch
       const tokenData = jwt.verify(token, SECRET);
       model
         .getOne(tokenData.user)
         .then((user) => {
           req.user = user;
+          console.log(req.user);
+          res.cookies = user;
+          console.log(res.cookies);
+
           next();
         })
         .catch((err) => {

@@ -7,9 +7,11 @@ const verifyUser = require('./middleware/auth');
 const logger = require('./middleware/logger');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const cookieParser = require('cookie-parser');
 
 const PORT = process.env.PORT || 4000;
 const server = express();
+server.use(cookieParser());
 server.use(express.urlencoded());
 server.use(logger);
 server.use(cors());
