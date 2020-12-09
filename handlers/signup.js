@@ -20,11 +20,12 @@ function signup(req, res, next) {
       //   expiresIn: '1h',
       // });
       const response = {
+        msg: 'You have successfully signed up',
         username: user.username,
         email: user.email,
         // access_token: token,
       };
-      res.status(200).send('You have successfully signed up');
+      res.status(200).send(response);
     })
     .catch(next);
 }
