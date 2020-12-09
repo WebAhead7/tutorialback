@@ -31,15 +31,18 @@ function login(req, res, next) {
       console.log(password);
       console.log(user.user_password);
       if (password !== user.user_password) {
+        console.log(1);
         const error = new Error('Wrong Password - Unathorized');
         obj.msg = 'Wrong Password - Unathorized';
         res.status(404).send(obj);
         next(error);
       } else {
+        console.log(2);
         const token = jwt.sign({ user: user.userid }, SECRET, {
           expiresIn: '1h',
         });
         obj.msg = 'Logged in';
+        console.log(3);
         res.cookie('access_token', token);
         res.status(200).send(obj);
       }
