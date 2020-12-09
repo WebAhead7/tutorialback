@@ -24,7 +24,7 @@ function signup(req, res, next) {
         email: user.email,
         // access_token: token,
       };
-      res.status(200).send(response);
+      res.status(200).send('You have successfully signed up');
     })
     .catch(next);
 }
